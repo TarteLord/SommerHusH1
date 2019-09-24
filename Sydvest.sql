@@ -105,7 +105,7 @@ GO
 
 
 INSERT INTO SommerHuse VALUES (2730, 'Solsortevej 24', 4, 70, 'Hustle', 4000, 'Jens karlsen', 'Godkendt',1), 
-						(2750, 'Rentemestervej 77', 10, 250, 'Luksus', 10000, 'Peter Jensen', 'Godkendt',2),
+						(2750, 'Rentemestervej 77', 10, 250, 'Luksus', 10000, 'Peter Jensen', 'Godkendt',3),
 						(8600, 'Silkeborgvej 63', 6, 110, 'Budget', 2600, 'Hans Bo', 'Ikke Godkendt',3)			
 GO
 
@@ -124,14 +124,13 @@ SELECT Ejer.EjerID, Ejer.Fornavn, Ejer.Efternavn FROM Ejer
 --Speciel ejer efter ID, alle info fra Ejer tabel
 SELECT * FROM Ejer WHERE EjerID = 1; 
 
---Speciel ejer efter ID, alle info fra Ejer tabel + Somerhuse de ejer
-SELECT Ejer.EjerID, Ejer.Fornavn, Ejer.Efternavn, Ejer.Adresse, Ejer.PostNr, Ejer.Telefon, SommerHuse.Adresse
+--Speciel ejer efter ID, alle info fra Ejer tabel + Somerhuse de ejer //kan man bruge right join?
+SELECT Ejer.EjerID, Ejer.Fornavn, Ejer.Efternavn, Ejer.Adresse, Ejer.PostNr, Ejer.Telefon, SommerHuse.Adresse, SommerHuse.PostNr
 FROM Ejer
-INNER JOIN SommerHuse ON Ejer.EjerID = SommerHuse.EjerID WHERE Ejer.EjerID = 3;
-
+INNER JOIN SommerHuse ON Ejer.EjerID = SommerHuse.EjerID WHERE SommerHuse.EjerID = 3;
 
 --SELECT Ejer.EjerID, Ejer.Fornavn, Ejer.Efternavn, Ejer.Adresse, Ejer
-SELECT Ejer.EjerID, Ejer.Fornavn, Ejer.Efternavn, Ejer.Adresse FROM EJER WHERE EJER.EjerID = 2;
+SELECT Ejer.EjerID, Ejer.Fornavn, Ejer.Efternavn, Ejer.Adresse, Ejer.PostNr, Ejer.Telefon FROM EJER WHERE EJER.EjerID = 2;
 
 --Alle sommerhuse (Adresse, postnummer, id).
 SELECT SommerHuse.SommerHusID,SommerHuse.Adresse, SommerHuse.PostNr FROM SommerHuse
