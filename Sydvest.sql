@@ -117,3 +117,30 @@ INSERT INTO Reservationer VALUES (2, 5, '27-07-2019', 'Super', 23124376),
 GO
 
 SELECT * FROM Reservationer 
+
+--Alle ejerne kun navn og id
+SELECT Ejer.EjerID, Ejer.Fornavn, Ejer.Efternavn FROM Ejer
+
+--Speciel ejer efter ID, alle info fra Ejer tabel
+SELECT * FROM Ejer WHERE EjerID = 1; 
+
+--Speciel ejer efter ID, alle info fra Ejer tabel + Somerhuse de ejer
+SELECT Ejer.EjerID, Ejer.Fornavn, Ejer.Efternavn, Ejer.Adresse, Ejer.PostNr, Ejer.Telefon, SommerHuse.Adresse
+FROM Ejer
+INNER JOIN SommerHuse ON Ejer.EjerID = SommerHuse.EjerID WHERE Ejer.EjerID = 3;
+
+
+--SELECT Ejer.EjerID, Ejer.Fornavn, Ejer.Efternavn, Ejer.Adresse, Ejer
+SELECT Ejer.EjerID, Ejer.Fornavn, Ejer.Efternavn, Ejer.Adresse FROM EJER WHERE EJER.EjerID = 2;
+
+--Alle sommerhuse (Adresse, postnummer, id).
+SELECT SommerHuse.SommerHusID,SommerHuse.Adresse, SommerHuse.PostNr FROM SommerHuse
+
+--Et sommerhus (Alle info fra tabel + Ejernavn fra Ejer tabel
+SELECT SommerHuse.SommerHusID, SommerHuse.PostNr, SommerHuse.Adresse, SommerHuse.Senge, SommerHuse.Stoerrelse, SommerHuse.Klassificering, SommerHuse.StandardUgePris, SommerHuse.Opsynsmand, SommerHuse.Godkendt, Ejer.Fornavn, Ejer.Efternavn
+FROM SommerHuse
+INNER JOIN Ejer ON SommerHuse.EjerID = Ejer.EjerID WHERE Ejer.EjerID = 3;
+
+
+
+ 
