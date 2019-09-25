@@ -321,11 +321,7 @@ namespace Sommerhus
                             int sqlIndex = menuCounter - 1;
                             if (currentMenu.Equals("SommerhusEjer"))
                             {
-                                DataTable currentTable = SQL.ReadTable("SELECT * FROM Ejer");
-
-                                DataRow row = currentTable.AsEnumerable().SingleOrDefault(r => r.Field<int>("EjerID") == sqlIndex);
                                 
-                                Console.WriteLine(row["EjerID"]);
 
                             }else if (currentMenu.Equals("Sommerhus"))
                             {

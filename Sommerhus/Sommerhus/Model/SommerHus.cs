@@ -4,5 +4,6 @@ public class Somerhus
 {
 	public Somerhus()
 	{
-	}
+
+    }
 }
