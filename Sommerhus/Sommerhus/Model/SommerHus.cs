@@ -1,8 +1,8 @@
 ﻿using System;
 
-public class Somerhus
+public class Sommerhus
 {
-	public Somerhus()
+	public Sommerhus()
 	{
 
     }
