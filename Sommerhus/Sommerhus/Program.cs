@@ -319,6 +319,9 @@ namespace Sommerhus
                             {
                                 DataTable currentTable = SQL.ReadTable("SELECT * FROM Ejer");
 
+                            
+                           
+
                             }else if (currentMenu.Equals("Sommerhus"))
                             {
 
