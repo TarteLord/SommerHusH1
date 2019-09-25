@@ -4,6 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Sommerhus.Database;
+using Sommerhus.Model;
+using Reservationer.Model;
+using Konsulent.Model;
+using SommerhusEjer.Model;
 using System.Data;
 using System.Data.SqlClient;
 
