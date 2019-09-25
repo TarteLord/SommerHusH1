@@ -46,6 +46,7 @@
     <Compile Include="Database\SQL.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Typeclass.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
