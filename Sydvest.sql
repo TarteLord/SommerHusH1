@@ -26,9 +26,9 @@ CREATE TABLE PostNrby
 )
 GO
 
-CREATE TABLE Medarbejdere
+CREATE TABLE konsulenter
 (
-	MedarbejderID int identity(1,1) primary key,
+	konsulenterID int identity(1,1) primary key,
 	Fornavn nvarchar(50) not null,
 	Efternavn nvarchar(100) not null,
 	Adresse nvarchar(255) not null,
@@ -37,6 +37,7 @@ CREATE TABLE Medarbejdere
 	Område smallint foreign key references PostNrby (postNr),
 )
 GO
+
 
 
 CREATE TABLE Ejer
@@ -76,7 +77,8 @@ CREATE TABLE Reservationer
 	Dage smallint not null,
 	StartDato Date not null,
 	Sæson nvarchar(100),
-	KundeTelefon int
+	KundeTelefon int,
+	Kundenavn nvarchar(255) not null,
 )
 GO
 SET DATEFORMAT dmy;
@@ -88,15 +90,11 @@ INSERT INTO PostnrBy VALUES (4000, 'Roskilde'),
 							(5000, 'Odense'  ),
 							(2730, 'Herlev'  ),
 							(7300, 'Jelling' ),
-							(8600, 'Silkeborg')
+							(8600, 'Silkeborg'),
+							(2000, 'Frederiksberg'),
+							(2400, 'København NV')
 GO 
 
-INSERT INTO Medarbejdere VALUES ('Hans', 'Andersen', 'Ligustervænget 42', 01020304, 2730, 2750), 
-							('Bent', 'Olesen', 'Solvej 27', 50607080, 5000, 4000),
-							('Lise', 'Pedersen', 'Nattergalevej 13', 10203040, 7300, 8600)
-
-						
-GO 
 
 INSERT INTO Ejer VALUES ('Gunnar', 'Bo', 'Fuglebakken 88', 2730, 91929394), 
 						('Lars', 'Hjortshøj', 'Strandvænget 22', 2750, 20304050),
@@ -110,13 +108,21 @@ INSERT INTO SommerHuse VALUES (2730, 'Solsortevej 24', 4, 70, 'Hustle', 4000, 'J
 GO
 
 
-INSERT INTO Reservationer VALUES (2, 5, '27-07-2019', 'Super', 23124376),
-								 (3, 10, '13-07-2019', 'Super', 58736871),
-								 (1, 5, '22-06-2019', 'Høj', 53807266),
-								 (3, 5, '02-02-2019', 'Lav', 76832658)
+INSERT INTO Reservationer VALUES (2, 5, '27-07-2019', 'Super', 23124376, 'bente Larsen'),
+								 (3, 10, '13-07-2019', 'Super', 58736871, 'Klaus bentsen'),
+								 (1, 5, '22-06-2019', 'Høj', 53807266,'Emil Dalange'),
+								 (3, 5, '02-02-2019', 'Lav', 76832658,'Daniel hansen')
 GO
 
-SELECT * FROM Reservationer 
+INSERT INTO konsulenter Values ('Søren','Pedersen','Smøralle 189', 85473921, 2730, 7300),
+							   ('Rasmus','Jensen','Nattergalevej 64', 73254323, 2000, 2400),
+							   ('Hanne','Larsen','Guldbergsgade 12', 29253446, 2400, 2000),
+							   ('Hans', 'Andersen', 'Ligustervænget 42', 01020304, 2730, 2750), 
+							   ('Bent', 'Olesen', 'Solvej 27', 50607080, 5000, 4000),
+							   ('Lise', 'Pedersen', 'Nattergalevej 13', 10203040, 7300, 8600)
+GO
+
+-------------------------------------SELECT STATEMENTS----------------------------------------------------------------
 
 --Alle ejerne kun navn og id
 SELECT Ejer.EjerID, Ejer.Fornavn, Ejer.Efternavn FROM Ejer
@@ -140,6 +146,23 @@ SELECT SommerHuse.SommerHusID, SommerHuse.PostNr, SommerHuse.Adresse, SommerHuse
 FROM SommerHuse
 INNER JOIN Ejer ON SommerHuse.EjerID = Ejer.EjerID WHERE Ejer.EjerID = 3;
 
+--Alle reservationer, dato + antal dage. logik for ugenumre evt i C# (Uge nummer, adresse, postnummer, kunde) OPRET KUNDE table evt.
+SELECT * FROM Reservationer
+
+--Alle udlejningskonsulenter (Fornavn, efternavn)
+SELECT konsulenter.Fornavn, konsulenter.Efternavn FROM konsulenter
+
+--Se reservationer på pågældende hus 
+SELECT * FROM Reservationer WHERE ReservationID = 2;
 
 
+---------------------------------UPDATES-------------------------------------------------
+
+--Ejer rette i alt undtagen ID
+UPDATE konsulenter 
+SET Fornavn = '', Efternavn = '', Adresse = '', 
+WHERE MedarbejderID = 2;
+--Sommerhus rette i alt undtagen SommerHusID
+
+--Reservationer
  
